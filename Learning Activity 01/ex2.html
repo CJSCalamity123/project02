@@ -1,17 +1,30 @@
+<!DOCTYPE html>
 <html>
     <head>
         <script>
-            function hello() {
-                alert('Hello!');
-                alert('bye');
+         
+         function get_data_ajax(){
+
+            const request = new XMLHttpRequest();
+            request.open('GET', 'https.//randomuser.me/api/');
+
+            request.onload = function() {
+                const data = JSON.parse(requst.responseText);
+                console.log(data);
             }
+            request.send();
+         }
 
         </script>
         <title>My Website</title>
     </head>
     <body>
-        <h1 style="background-color:red;" onmouseover="hello()">Welcome!</h1>
-        <input type="text" onkeypress="hello()">
-        <button onclick="hello()">Click Here!</button>
+       <button onclick="">Get Data Using AJAX</button>
+       <button onclick="">Get Data Using fetch Promise</button>
+       <button onclick="">Get Data Using fetch and Async</button>
+    
+    <div id="showData">
+    </div>
+  
     </body>
 </html>
