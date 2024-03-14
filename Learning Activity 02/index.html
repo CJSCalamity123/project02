@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="style_text.css">
+        <link rel="stylesheet" href="style_table.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    </head>
+   <body>
+    <div>
+        <ul>
+            <li onclick="render_view('post_view1', 0)"> <span>Prof. One</span></li>
+            <li onclick="render_view('post_view1', 1)"> <span>Prof. Two</span></li>
+            <li onclick="render_view('post_view1', 2)"> <span>Prof. Three</span></li>
+            <li onclick="render_view('post_view1', 0)"> <span>Prof. Four</span></li>
+        </ul>
+    
+    </div>
+    <div id="view_widget">
+    </div>
+</body>
+
+<script id="post_view1" type="text/x-handlebars-template">
+    <div class="card-body">
+        <h4 class="card-title">{{name}}</h4>
+        <p class="card-text">{{expertise}}</p>
+        <a href="{{profile}}" class="btn btn-primary">See PRofile</a>
+    </div>
+</script>
+
+<script id="post_view2" type="text/x-handlebars-template">
+    <div class="card-body">
+        <h4 class="card-title" style="color:red">{{name}}</h4>
+        <p class="card-text">{{expertise}}</p>
+        <a href="{{profile}}" class="btn btn-primary">See PRofile</a>
+    </div>
+</script>
+</html>
