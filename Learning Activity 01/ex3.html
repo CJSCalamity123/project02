@@ -1,1 +1,209 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Christopher's To-Do List</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scare=1.0">
+    <link rel="stylesheet" href="style_text.css">
+    <link rel="stylesheet" href="style_table.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+   
+   <style>
+        body {
+                   background-image: url("Background.jpg");
+                   background-repeat: no-repeat;
+                   background-position: right top;
+                   background-attachment: fixed;
+               }
+   
+               hr{
+               background-color:blue;
+               color:black
+               }
+   
+               h2 {
+                   background-color:lightgreen;
+                   text-align:center;
+                   color:rgb(255, 96, 149);
+                   font-size:2em;
+                   font-family: Georgia, 'Times New Roman', Times, serif;
+               }
+   
+               h4 {
+                   color:rgb(255, 0, 128);
+                   font-size:100%;
+               }
+   
+               a{
+                   color: darkred;opacity:0.8;
+               }
+   
+               li {
+                   color: white;
+               }
+   
+               p {
+                   color:white;
+                   background-color: aqua(50%);
+               }
+   
+               ol {
+                   color: white
+               }
+   
+               td {
+                   background-color: white;opacity:0.7;
+               }
+   
+               #myDIV {
+                   font-size: 100%;
+               }
+   
+               #heading {
+                   background-color:green;
+                   text-align:center;
+                   font-size:5em;
+               }
+   
+               .header {
+                   background-color: #f1f1f1;
+                   padding: 20px;
+                   text-align: center;
+               }
+   
+               @media print {
+                   .screen_only{
+                       display:none;
+                   }
+               }
+   
+               @media (max-width: 607px){
+   
+                   .title{
+                   background-color:red;
+               }
+   
+                   body{
+                       background-color:rgb(243, 13, 51);
+                       color:white;
+                   }
+   
+                   
+                   td{
+                   color:darkgreen;
+                   }
+   
+                   
+                   h2{
+                   background-color:green;
+                   color:aqua;
+                   }
+   
+                   .green-background{
+                   background-color: blue;
+                   color:lightgreen;
+                   }
+               }
+   
+               @media (min-width: 608px) and (max-width: 1000px) {
+                   body {
+                       background-color:lightgreen;
+                   }
+   
+                   h2{
+                   background-color:blue;
+                   color:pink;
+                   }
+   
+                   .green-background{
+                   background-color: lightblue;
+                   color:hotpink;
+                   }
+               }
+       .task {
+         margin-bottom: 10px;
+       }
+       .completed {
+         text-decoration: line-through;
+       }
+     </style>
+  
+  <h1>Task List</h1>
+  
+  <!-- Task input form -->
+  <form id="taskForm">
+    <label for="taskTitle">Task Title:</label>
+    <input type="text" id="taskTitle" required>
+    
+    <label for="priority">Priority:</label>
+    <select id="priority">
+      <option value="low">Low</option>
+      <option value="medium">Medium</option>
+      <option value="high">High</option>
+    </select>
+    
+    <button type="submit">Add Task</button>
+  </form>
+
+  <!-- Task list -->
+  <div id="taskList"></div>
+
+  <script>
+    // JavaScript logic
+    const taskList = [];
+
+    const form = document.getElementById('taskForm');
+    const taskTitleInput = document.getElementById('taskTitle');
+    const prioritySelect = document.getElementById('priority');
+    const taskListDiv = document.getElementById('taskList');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      
+      const task = {
+        title: taskTitleInput.value,
+        priority: prioritySelect.value,
+        status: 'pending'
+      };
+
+      taskList.push(task);
+      renderTask(task);
+      
+      form.reset();
+    });
+
+    function renderTask(task) {
+      const taskDiv = document.createElement('div');
+      taskDiv.classList.add('task');
+      
+      const statusClass = task.status === 'completed' ? 'completed' : '';
+      taskDiv.innerHTML = `
+        <span class="${statusClass}">${task.title} - Priority: ${task.priority}</span>
+        <button onclick="completeTask(${taskList.indexOf(task)})">Complete</button>
+        <button onclick="removeTask(${taskList.indexOf(task)})">Remove</button>
+      `;
+      
+      taskListDiv.appendChild(taskDiv);
+    }
+
+    function completeTask(index) {
+      const task = taskList[index];
+      task.status = 'completed';
+      taskListDiv.innerHTML = '';
+      taskList.forEach(renderTask);
+    }
+
+    function removeTask(index) {
+      taskList.splice(index, 1);
+      taskListDiv.innerHTML = '';
+      taskList.forEach(renderTask);
+    }
+  </script>
+</body>
+</html>
